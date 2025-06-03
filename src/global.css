@@ -1,0 +1,9 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+footer a {
+  color: rgb(0, 160, 152);
+  text-decoration: none;
+}
