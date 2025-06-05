@@ -1,29 +1,45 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Meus Links</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div class="container">
-      <img id="avatar" alt="Foto de perfil" />
-      <h1 id="nome">Carregando...</h1>
 
-      <a href="#" id="link_1" class="link-btn">Carregando...</a>
-      <a href="#" id="link_2" class="link-btn">Carregando...</a>
-      <a href="#" id="link_3" class="link-btn">Carregando...</a>
-      <a href="#" id="link_4" class="link-btn">Carregando...</a>
-      <a href="#" id="link_5" class="link-btn">Carregando...</a>
-      <a href="#" id="link_6" class="link-btn">Carregando...</a>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meus Links</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
 
-      <footer>
-        <p>Feito por <a href="https://github.com/RuanLopes1350">Ruan Lopes</a></p>
-      </footer>
+<body>
+  <div class="container">
+    <img id="avatar" alt="Foto de perfil" />
+    <h1 id="nome">Carregando...</h1>
+
+    <a href="#" id="link_1" class="link-btn">Carregando...</a>
+    <a href="#" id="link_2" class="link-btn">Carregando...</a>
+    <a href="#" id="link_3" class="link-btn">Carregando...</a>
+    <a href="#" id="link_4" class="link-btn">Carregando...</a>
+    <a href="#" id="link_5" class="link-btn">Carregando...</a>
+    <a href="#" id="link_6" class="link-btn">Carregando...</a>
+
+    <footer>
+      <p>Feito por <a href="https://github.com/RuanLopes1350">Ruan Lopes</a></p>
+    </footer>
+  </div>
+
+  <div id="error-container" class="error-container" style="display: none;">
+    <div class="error-content">
+      <i class="fas fa-exclamation-circle error-icon"></i>
+      <h2 class="error-title">Perfil não encontrado</h2>
+      <p class="error-message">O perfil que você está procurando não existe ou foi removido.</p>
+      <a href="/" class="error-button">
+        <i class="fas fa-home"></i>
+        Voltar para o início
+      </a>
     </div>
+  </div>
 
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
 </html>

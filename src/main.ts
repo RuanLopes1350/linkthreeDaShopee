@@ -13,6 +13,60 @@ const link4 = document.querySelector<HTMLLinkElement>('#link_4')!
 const link5 = document.querySelector<HTMLLinkElement>('#link_5')!
 const link6 = document.querySelector<HTMLLinkElement>('#link_6')!
 const container = document.querySelector<HTMLDivElement>('.container')!
+const errorContainer = document.querySelector<HTMLDivElement>('#error-container')!
+
+function mostrarErro() {
+  // Esconder o container principal
+  container.style.display = 'none';
+  
+  // Mostrar o container de erro
+  errorContainer.style.display = 'flex';
+  
+  // Definir cor de fundo padrão
+  document.body.style.backgroundColor = '#f5f5f5';
+}
+
+// Function to determine which icon to use based on link name or URL
+function getIconClass(linkName: string, url: string): string {
+  // Convert to lowercase for easier matching
+  const name = linkName.toLowerCase();
+  const urlLower = url.toLowerCase();
+  
+  // Checar o nome para encontrar o ícone apropriado
+  if (name.includes('github')) return 'fab fa-github';
+  if (name.includes('linkedin')) return 'fab fa-linkedin';
+  if (name.includes('instagram') || name.includes('insta')) return 'fab fa-instagram';
+  if (name.includes('twitter') || name.includes('x.com')) return 'fab fa-twitter';
+  if (name.includes('youtube')) return 'fab fa-youtube';
+  if (name.includes('facebook')) return 'fab fa-facebook';
+  if (name.includes('twitch')) return 'fab fa-twitch';
+  if (name.includes('discord')) return 'fab fa-discord';
+  if (name.includes('whatsapp')) return 'fab fa-whatsapp';
+  if (name.includes('telegram')) return 'fab fa-telegram';
+  if (name.includes('behance')) return 'fab fa-behance';
+  if (name.includes('dribbble')) return 'fab fa-dribbble';
+  if (name.includes('spotify')) return 'fab fa-spotify';
+  if (name.includes('email') || name.includes('mail')) return 'fas fa-envelope';
+  if (name.includes('blog')) return 'fas fa-blog';
+  if (name.includes('portfolio') || name.includes('portfólio')) return 'fas fa-briefcase';
+  
+  // se o nome não corresponder, verificar a URL
+  if (urlLower.includes('github.com')) return 'fab fa-github';
+  if (urlLower.includes('linkedin.com')) return 'fab fa-linkedin';
+  if (urlLower.includes('instagram.com')) return 'fab fa-instagram';
+  if (urlLower.includes('twitter.com') || urlLower.includes('x.com')) return 'fab fa-twitter';
+  if (urlLower.includes('youtube.com')) return 'fab fa-youtube';
+  if (urlLower.includes('facebook.com')) return 'fab fa-facebook';
+  if (urlLower.includes('twitch.tv')) return 'fab fa-twitch';
+  if (urlLower.includes('discord.gg')) return 'fab fa-discord';
+  if (urlLower.includes('behance.net')) return 'fab fa-behance';
+  if (urlLower.includes('dribbble.com')) return 'fab fa-dribbble';
+  if (urlLower.includes('spotify.com')) return 'fab fa-spotify';
+  if (urlLower.includes('mailto:')) return 'fas fa-envelope';
+  
+  // Default icon if no match is found
+  return 'fas fa-link';
+}
 
 async function carregarPerfil() {
   try {
@@ -24,8 +78,8 @@ async function carregarPerfil() {
     console.log('Usuário encontrado:', usuario); // Log para debug
 
     if (!usuario) {
-      alert('Usuário não encontrado!')
-      return
+      mostrarErro();
+      return;
     }
 
     // Remover qualquer estilo anterior
@@ -67,7 +121,7 @@ async function carregarPerfil() {
 
   } catch (error) {
     console.error('Erro ao buscar dados:', error)
-    alert('Erro ao carregar os dados do perfil!')
+    mostrarErro();
   }
 }
 
@@ -79,9 +133,9 @@ function configurarLink(elemento: HTMLLinkElement, url: string, texto: string, u
 
   // Limpar estilos anteriores
   elemento.removeAttribute('style');
+  elemento.innerHTML = '';
   
   elemento.href = url
-  elemento.textContent = texto || 'Link'
   elemento.style.display = 'block'
   
   // Aplicar estilos do usuário
@@ -93,6 +147,21 @@ function configurarLink(elemento: HTMLLinkElement, url: string, texto: string, u
   elemento.style.textAlign = 'center'
   elemento.style.textDecoration = 'none'
   elemento.style.width = '100%'
+  elemento.style.display = 'flex'
+  elemento.style.alignItems = 'center'
+  elemento.style.justifyContent = 'center'
+  elemento.style.gap = '10px'
+  
+  const iconClass = getIconClass(texto || '', url);
+
+  const iconElement = document.createElement('i');
+  iconElement.className = iconClass;
+  
+  const textElement = document.createElement('span');
+  textElement.textContent = texto || 'Link';
+  
+  elemento.appendChild(iconElement);
+  elemento.appendChild(textElement);
   
   if (usuario.border_botao) {
     elemento.style.border = usuario.border_botao
@@ -102,7 +171,7 @@ function configurarLink(elemento: HTMLLinkElement, url: string, texto: string, u
     elemento.style.boxShadow = usuario.sombra_botao
   }
   
-  console.log('Configurando link:', texto, 'com cor:', usuario.cor_botao);
+  console.log('Configurando link:', texto, 'com cor:', usuario.cor_botao, 'e ícone:', iconClass);
 }
 
 carregarPerfil()
